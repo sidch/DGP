@@ -1,23 +1,5 @@
 //============================================================================
 //
-// This file is part of the DGP project.
-//
-// This software is covered by the following BSD license, except for portions
-// derived from other works which are covered by their respective licenses.
-// For full licensing information including reproduction of these external
-// licenses, see the file LICENSE.txt provided in the documentation.
-//
-// Copyright (C) 2011, Siddhartha Chaudhuri/Stanford University
-//
-// All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided that the following conditions are met:
-//
-// * Redistributions of source code must retain the above copyright notice,
-// this list of conditions and the following disclaimer.
-//============================================================================
-//
 // DGP: Digital Geometry Processing toolkit
 // Copyright (C) 2016, Siddhartha Chaudhuri
 //
