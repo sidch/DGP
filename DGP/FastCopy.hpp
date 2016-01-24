@@ -12,7 +12,7 @@
 #ifndef __DGP_FastCopy_hpp__
 #define __DGP_FastCopy_hpp__
 
-#include "../Common.hpp"
+#include "Common.hpp"
 #include <cstring>
 #include <iterator>
 #include <type_traits>

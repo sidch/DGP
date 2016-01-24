@@ -63,7 +63,15 @@ Note that many convenience types, such as `Vector3` and `Matrix4`, are typedefs 
 
 ## Using the code
 
-The toolkit is written in standard C++ and should compile with any modern, standards-compliant, C++11 compiler. The usual candidates are GCC, Clang and Visual C++. You will need to add `-std=c++11` for the first two. The syntax is actually C++98-compatible; only certain library features (such as `unordered_set` and `type_traits`) require C++11.
+The toolkit is written in standard C++ and should compile with any modern, standards-compliant, C++11 compiler. The usual candidates are GCC, Clang and Visual C++. The syntax is actually C++98-compatible; only certain library features (such as `unordered_set` and `type_traits`) require C++11.
+
+***
+**GCC/Clang-specific**: You **MUST** compile with strict aliasing turned OFF. This is achieved with `-fno-strict-aliasing`. To support C++11, you need `-std=c++11`. I also recommend `-Wall -g2 -O2` (all **W**arnings, debu**G**gable binaries, **O**ptimize for speed). ``-O2`` messes up the debugging a bit so turn it off temporarily if you can't track down your bug. So the full command line is:
+
+```
+g++ -Wall -g2 -O2 -fno-strict-aliasing -std=c++11 <source-files>
+```
+***
 
 When building your assignment, make sure the `.cpp` files in the `src/DGP` subfolder are included in the build. If you're using a Makefile, use a wildcard pattern such as `$(wildcard DGP/*.cpp)`. If you're using Visual Studio or other IDE, add the subfolder to the project. You might need to explicitly link the standard math library via `-lm`. On OS X, you will need to add `-framework Carbon`.
 
@@ -82,4 +90,3 @@ class Foo
   ...
 };
 ```
-For GCC/Clang, I recommend building with `-Wall -g2 -O2` (all **W**arnings, debu**G**gable binaries, **O**ptimize for speed). ``-O2`` messes up the debugging a bit so turn it off temporarily if you can't track down your bug.
