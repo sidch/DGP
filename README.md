@@ -66,7 +66,7 @@ Note that many convenience types, such as `Vector3` and `Matrix4`, are typedefs 
 The toolkit is written in standard C++ and should compile with any modern, standards-compliant, C++11 compiler. The usual candidates are GCC, Clang and Visual C++. The syntax is actually C++98-compatible; only certain library features (such as `unordered_set` and `type_traits`) require C++11.
 
 ***
-**GCC/Clang-specific**: You **MUST** compile with strict aliasing turned OFF. This is achieved with `-fno-strict-aliasing`. To support C++11, you need `-std=c++11`. I also recommend `-Wall -g2 -O2` (all **W**arnings, debu**G**gable binaries, **O**ptimize for speed). ``-O2`` messes up the debugging a bit so turn it off temporarily if you can't track down your bug. So the full command line is:
+**GCC/Clang-specific**: You **MUST** compile with strict aliasing turned OFF. This is achieved with `-fno-strict-aliasing`. To support C++11, you need `-std=c++11`. I also recommend `-Wall -g2 -O2` (all **W**arnings, debu**G**gable binaries, **O**ptimize for speed). ``-O2`` messes up the debugging a bit so turn it off temporarily if you can't track down your bug. The full command line is:
 
 ```
 g++ -Wall -g2 -O2 -fno-strict-aliasing -std=c++11 <source-files>

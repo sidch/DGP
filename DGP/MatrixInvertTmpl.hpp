@@ -34,9 +34,9 @@ namespace Internal {
  */
 template <typename DGP_INVERT_MATRIX_TEMPLATE_TYPE> /* DGP_DLL_LOCAL */
 void
-DGP_INVERT_MATRIX_FN( DGP_INVERT_MATRIX_TYPE & mat, long * col_index, long * row_index, long * pivot )
+DGP_INVERT_MATRIX_FN( DGP_INVERT_MATRIX_TEMPLATE_TYPE & mat, long * col_index, long * row_index, long * pivot )
 {
-  typedef typename DGP_INVERT_MATRIX_TYPE::Value Value;
+  typedef typename DGP_INVERT_MATRIX_TEMPLATE_TYPE::Value Value;
 
   alwaysAssertM(mat.isSquare(), "Can't invert non-square matrices");
   alwaysAssertM(!std::is_integral<Value>::value, "Can't invert integer matrices");

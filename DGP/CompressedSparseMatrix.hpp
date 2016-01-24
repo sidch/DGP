@@ -223,7 +223,7 @@ class /* DGP_API */ CompressedSparseMatrix : public virtual IteratableMatrix<T>,
     template <typename MatrixT> explicit
     CompressedSparseMatrix(MatrixT const & src,
                            typename std::enable_if< std::is_base_of< IteratableMatrix<typename MatrixT::Value>,
-                                                                     MatrixT > >::type * dummy = NULL)
+                                                                     MatrixT >::value >::type * dummy = NULL)
     {
       if (L == MatrixLayout::ROW_MAJOR)
       {
