@@ -3,6 +3,8 @@ Toolkit for CS749: Digital Geometry Processing (http://www.cse.iitb.ac.in/~cs749
 
 Author: Siddhartha Chaudhuri. Released under the BSD license (see LICENSE.txt)
 
+If you find a bug, please let me know promptly. Thank you!
+
 ## Installation
 
 To check out the repository:
