@@ -64,7 +64,7 @@ DGP_API void parseCommaSeparated(std::string const & s, std::vector<std::string>
  * @return The number of fields found.
  */
 DGP_API long stringSplit(std::string const & s, char split_char, std::vector<std::string> & result,
-                          bool skip_empty_fields = false);
+                         bool skip_empty_fields = false);
 
 /**
  * Split a string at each occurrence of any splitting character from a provided set.
@@ -78,7 +78,7 @@ DGP_API long stringSplit(std::string const & s, char split_char, std::vector<std
  * @return The number of fields found.
  */
 DGP_API long stringSplit(std::string const & s, std::string const & split_chars, std::vector<std::string> & result,
-                          bool skip_empty_fields = false);
+                         bool skip_empty_fields = false);
 
 /** Concatenate a sequence of strings, separated by a joining character. */
 DGP_API std::string stringJoin(std::vector<std::string> const  & a, char join_char);
