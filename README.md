@@ -5,6 +5,14 @@ Author: Siddhartha Chaudhuri. Released under the BSD license (see LICENSE.txt)
 
 If you find a bug, please let me know promptly. Thank you!
 
+## Prerequisites
+
+DGP's graphics module needs OpenGL. If you plan to use it, please ensure you have OpenGL 2.0 or later installed on your system. The guides at http://web.eecs.umich.edu/~sugih/courses/eecs487/glut-howto/ and http://cacs.usc.edu/education/cs596/OGL_Setup.pdf may be useful.
+
+If you want to take full advantage of your fancy graphics card, you will need the latest drivers from the manufacturer. (This is not an option on OS X.) On Linux, if you're lucky, things will just work. Else, you can be stuck in some weird conflict between the default GL library (Mesa) and the manufacturer's optimized version (NVIDIA or AMD). Make sure `libGL.so`, wherever it is located on your system (e.g. `/usr/lib/x86_64-linux-gnu/` on Ubuntu 14.04), is a link to the manufacturer-provided `libGL.so` (e.g. `/usr/lib/nvidia-352/libGL.so`).
+
+If you're not going to use the graphics module, there are no external dependencies. Just omit the `DGP/Graphics` subdirectory from your build.
+
 ## Installation
 
 To check out the repository:
@@ -73,7 +81,7 @@ g++ -Wall -g2 -O2 -fno-strict-aliasing -std=c++11 <source-files>
 ```
 ***
 
-When building your assignment, make sure the `.cpp` files in the `src/DGP` subfolder are included in the build. If you're using a Makefile, use a wildcard pattern such as `$(wildcard DGP/*.cpp)`. If you're using Visual Studio or other IDE, add the subfolder to the project. You might need to explicitly link the standard math library via `-lm`. On OS X, you will need to add `-framework Carbon`.
+When building your assignment, make sure the `.cpp` files in the `src/DGP` (and `src/DGP/Graphics`, if you're using the graphics module) subfolder are included in the build. If you're using a Makefile, use a wildcard pattern such as `$(wildcard DGP/*.cpp)`. If you're using Visual Studio or other IDE, add the subfolder to the project. You might need to explicitly link the standard math library via `-lm`. On OS X, you will need to add `-framework Carbon`.
 
 In your source files (such as `Foo.cpp` above), include the appropriate DGP headers as needed:
 

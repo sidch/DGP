@@ -61,7 +61,9 @@ fastCopyBackwardImpl(T const * first, T const * last, T * out, std::true_type co
  * A version of <tt>std::copy</tt> that calls <tt>memcpy</tt> where appropriate (if the class has a trivial assignment operator
  * and the iterators are raw pointers) for speed.
  *
- * To take advantage of fast copying, specialize std::is_trivially_copyable to return true for the value type.
+ * To take advantage of fast copying, specialize std::is_trivial to return true for the value type.
+ *
+ * @todo Reduce requirement to std::is_trivially_copyable once support for this is widespread.
  */
 template <typename I1, typename I2>
 inline I2
@@ -73,21 +75,23 @@ fastCopy(I1 first, I1 last, I2 out)
   // requirement we detect with overload resolution):
   //
   typedef typename std::iterator_traits<I1>::value_type value_type;
-  return FastCopyInternal::fastCopyImpl(first, last, out, std::is_trivially_copyable<value_type>());
+  return FastCopyInternal::fastCopyImpl(first, last, out, std::is_trivial<value_type>());
 }
 
 /**
  * A version of <tt>std::copy_backward</tt> that calls <tt>memmove</tt> where appropriate (if the class has a trivial assignment
  * operator) for speed.
  *
- * To take advantage of fast copying, specialize std::is_trivially_copyable to return true for the value type.
+ * To take advantage of fast copying, specialize std::is_trivial to return true for the value type.
+ *
+ * @todo Reduce requirement to std::is_trivially_copyable once support for this is widespread.
  */
 template <typename I1, typename I2>
 inline I2
 fastCopyBackward(I1 first, I1 last, I2 out)
 {
   typedef typename std::iterator_traits<I1>::value_type value_type;
-  return FastCopyInternal::fastCopyBackwardImpl(first, last, out, std::is_trivially_copyable<value_type>());
+  return FastCopyInternal::fastCopyBackwardImpl(first, last, out, std::is_trivial<value_type>());
 }
 
 } // namespace DGP
