@@ -7,7 +7,7 @@ If you find a bug, please let me know promptly. Thank you!
 
 ## Prerequisites
 
-DGP's graphics module needs OpenGL. If you plan to use it, please ensure you have OpenGL 2.0 or later (GL, GLU *and* GLUT) installed on your system. The guides at http://web.eecs.umich.edu/~sugih/courses/eecs487/glut-howto/ and http://cacs.usc.edu/education/cs596/OGL_Setup.pdf may be useful.
+DGP's graphics module needs OpenGL. If you plan to use it, please ensure you have OpenGL 2.0 or later (GL and GLU) installed on your system. The guides at http://web.eecs.umich.edu/~sugih/courses/eecs487/glut-howto/ and http://cacs.usc.edu/education/cs596/OGL_Setup.pdf may be useful.
 
 If you want to take full advantage of your fancy graphics card, you will need the latest drivers from the manufacturer. (This is not an option on OS X.) On Linux, if you're lucky, things will just work. Else, you can be stuck in some weird conflict between the default GL library (Mesa) and the manufacturer's optimized version (NVIDIA or AMD). Make sure `libGL.so`, wherever it is located on your system (e.g. `/usr/lib/x86_64-linux-gnu/` on Ubuntu 14.04), is a link to the manufacturer-provided `libGL.so` (e.g. `/usr/lib/nvidia-352/libGL.so`).
 
