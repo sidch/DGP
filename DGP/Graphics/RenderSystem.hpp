@@ -26,9 +26,13 @@
 #include <unordered_set>
 
 namespace DGP {
+
+/** %Graphics module. */
 namespace Graphics {
 
 /**
+ * Abstraction layer on top of OpenGL rendering API. Convenient for directly using other DGP classes and setting up
+ * framebuffers, textures, shaders and vertex buffers. Can be freely mixed with raw OpenGL calls.
  *
  * If no rendering context is available when a rendersystem is constructed, the new rendersystem will be set up for offscreen
  * rendering if possible. In this case, you must explicitly create and attach a framebuffer to the rendersystem before you can
