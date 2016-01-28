@@ -338,37 +338,37 @@ class DGP_API RenderSystem : public AbstractNamedObject
     /** Send a 4-vertex to the rendersystem. */
     void sendVertex(double x, double y, double z, double w);
 
-    /** Send a normal to the rendersystem. */
+    /** Set the current normal. */
     void setNormal(Vector3 const & normal);
 
-    /** Send a normal to the rendersystem. */
+    /** Set the current normal. */
     void setNormal(float x, float y, float z);
 
-    /** Send a normal to the rendersystem. */
+    /** Set the current normal. */
     void setNormal(double x, double y, double z);
 
-    /** Send a floating-point texture coordinate to the rendersystem. */
+    /** Set the current 1D texture coordinate. */
     void setTexCoord(int texunit, float texcoord);
 
-    /** Send a floating-point texture coordinate to the rendersystem. */
+    /** Set the current 1D texture coordinate. */
     void setTexCoord(int texunit, double texcoord);
 
-    /** Send a 2-component texture coordinate to the rendersystem. */
+    /** Set the current 2D texture coordinate. */
     void setTexCoord(int texunit, Vector2 const & texcoord);
 
-    /** Send a 2-component texture coordinate to the rendersystem. */
+    /** Set the current 2D texture coordinate. */
     void setTexCoord(int texunit, float x, float y);
 
-    /** Send a 2-component texture coordinate to the rendersystem. */
+    /** Set the current 2D texture coordinate. */
     void setTexCoord(int texunit, double x, double y);
 
-    /** Send a 3-component texture coordinate to the rendersystem. */
+    /** Set the current 3D texture coordinate. */
     void setTexCoord(int texunit, Vector3 const & texcoord);
 
-    /** Send a 3-component texture coordinate to the rendersystem. */
+    /** Set the current 3D texture coordinate. */
     void setTexCoord(int texunit, float x, float y, float z);
 
-    /** Send a 3-component texture coordinate to the rendersystem. */
+    /** Set the current 3D texture coordinate. */
     void setTexCoord(int texunit, double x, double y, double z);
 
     /** Finish drawing the primitive started by beginPrimitive(). */
