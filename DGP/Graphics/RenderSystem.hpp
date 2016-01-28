@@ -339,37 +339,37 @@ class DGP_API RenderSystem : public AbstractNamedObject
     void sendVertex(double x, double y, double z, double w);
 
     /** Send a normal to the rendersystem. */
-    void sendNormal(Vector3 const & normal);
+    void setNormal(Vector3 const & normal);
 
     /** Send a normal to the rendersystem. */
-    void sendNormal(float x, float y, float z);
+    void setNormal(float x, float y, float z);
 
     /** Send a normal to the rendersystem. */
-    void sendNormal(double x, double y, double z);
+    void setNormal(double x, double y, double z);
 
     /** Send a floating-point texture coordinate to the rendersystem. */
-    void sendTexCoord(int texunit, float texcoord);
+    void setTexCoord(int texunit, float texcoord);
 
     /** Send a floating-point texture coordinate to the rendersystem. */
-    void sendTexCoord(int texunit, double texcoord);
+    void setTexCoord(int texunit, double texcoord);
 
     /** Send a 2-component texture coordinate to the rendersystem. */
-    void sendTexCoord(int texunit, Vector2 const & texcoord);
+    void setTexCoord(int texunit, Vector2 const & texcoord);
 
     /** Send a 2-component texture coordinate to the rendersystem. */
-    void sendTexCoord(int texunit, float x, float y);
+    void setTexCoord(int texunit, float x, float y);
 
     /** Send a 2-component texture coordinate to the rendersystem. */
-    void sendTexCoord(int texunit, double x, double y);
+    void setTexCoord(int texunit, double x, double y);
 
     /** Send a 3-component texture coordinate to the rendersystem. */
-    void sendTexCoord(int texunit, Vector3 const & texcoord);
+    void setTexCoord(int texunit, Vector3 const & texcoord);
 
     /** Send a 3-component texture coordinate to the rendersystem. */
-    void sendTexCoord(int texunit, float x, float y, float z);
+    void setTexCoord(int texunit, float x, float y, float z);
 
     /** Send a 3-component texture coordinate to the rendersystem. */
-    void sendTexCoord(int texunit, double x, double y, double z);
+    void setTexCoord(int texunit, double x, double y, double z);
 
     /** Finish drawing the primitive started by beginPrimitive(). */
     void endPrimitive();

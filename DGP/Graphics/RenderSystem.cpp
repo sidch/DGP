@@ -722,25 +722,25 @@ RenderSystem::sendVertex(double x, double y, double z, double w)
 }
 
 void
-RenderSystem::sendNormal(Vector3 const & normal)
+RenderSystem::setNormal(Vector3 const & normal)
 {
   glNormal3f(normal.x(), normal.y(), normal.z());
 }
 
 void
-RenderSystem::sendNormal(float x, float y, float z)
+RenderSystem::setNormal(float x, float y, float z)
 {
   glNormal3f(x, y, z);
 }
 
 void
-RenderSystem::sendNormal(double x, double y, double z)
+RenderSystem::setNormal(double x, double y, double z)
 {
   glNormal3d(x, y, z);
 }
 
 void
-RenderSystem::sendTexCoord(int texunit, float texcoord)
+RenderSystem::setTexCoord(int texunit, float texcoord)
 {
   if (DGP_SUPPORTS(ARB_multitexture))
     glMultiTexCoord1fARB(GL_TEXTURE0_ARB + texunit, texcoord);
@@ -752,7 +752,7 @@ RenderSystem::sendTexCoord(int texunit, float texcoord)
 }
 
 void
-RenderSystem::sendTexCoord(int texunit, double texcoord)
+RenderSystem::setTexCoord(int texunit, double texcoord)
 {
   if (DGP_SUPPORTS(ARB_multitexture))
     glMultiTexCoord1dARB(GL_TEXTURE0_ARB + texunit, texcoord);
@@ -764,7 +764,7 @@ RenderSystem::sendTexCoord(int texunit, double texcoord)
 }
 
 void
-RenderSystem::sendTexCoord(int texunit, Vector2 const & texcoord)
+RenderSystem::setTexCoord(int texunit, Vector2 const & texcoord)
 {
   if (DGP_SUPPORTS(ARB_multitexture))
     glMultiTexCoord2fARB(GL_TEXTURE0_ARB + texunit, (float)texcoord.x(), (float)texcoord.y());
@@ -776,7 +776,7 @@ RenderSystem::sendTexCoord(int texunit, Vector2 const & texcoord)
 }
 
 void
-RenderSystem::sendTexCoord(int texunit, float x, float y)
+RenderSystem::setTexCoord(int texunit, float x, float y)
 {
   if (DGP_SUPPORTS(ARB_multitexture))
     glMultiTexCoord2fARB(GL_TEXTURE0_ARB + texunit, x, y);
@@ -788,7 +788,7 @@ RenderSystem::sendTexCoord(int texunit, float x, float y)
 }
 
 void
-RenderSystem::sendTexCoord(int texunit, double x, double y)
+RenderSystem::setTexCoord(int texunit, double x, double y)
 {
   if (DGP_SUPPORTS(ARB_multitexture))
     glMultiTexCoord2dARB(GL_TEXTURE0_ARB + texunit, x, y);
@@ -800,7 +800,7 @@ RenderSystem::sendTexCoord(int texunit, double x, double y)
 }
 
 void
-RenderSystem::sendTexCoord(int texunit, Vector3 const & texcoord)
+RenderSystem::setTexCoord(int texunit, Vector3 const & texcoord)
 {
   if (DGP_SUPPORTS(ARB_multitexture))
     glMultiTexCoord3fARB(GL_TEXTURE0_ARB + texunit, (float)texcoord.x(), (float)texcoord.y(), (float)texcoord.z());
@@ -812,7 +812,7 @@ RenderSystem::sendTexCoord(int texunit, Vector3 const & texcoord)
 }
 
 void
-RenderSystem::sendTexCoord(int texunit, float x, float y, float z)
+RenderSystem::setTexCoord(int texunit, float x, float y, float z)
 {
   if (DGP_SUPPORTS(ARB_multitexture))
     glMultiTexCoord3fARB(GL_TEXTURE0_ARB + texunit, x, y, z);
@@ -824,7 +824,7 @@ RenderSystem::sendTexCoord(int texunit, float x, float y, float z)
 }
 
 void
-RenderSystem::sendTexCoord(int texunit, double x, double y, double z)
+RenderSystem::setTexCoord(int texunit, double x, double y, double z)
 {
   if (DGP_SUPPORTS(ARB_multitexture))
     glMultiTexCoord3dARB(GL_TEXTURE0_ARB + texunit, x, y, z);
