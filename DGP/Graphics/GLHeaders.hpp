@@ -13,11 +13,6 @@
 #include "../FilePath.hpp"
 
 // Main includes
-
-#ifndef GLEW_STATIC
-#  define GLEW_STATIC
-#endif
-
 #include "glew.hpp"
 
 #if defined(DGP_OSMESA)

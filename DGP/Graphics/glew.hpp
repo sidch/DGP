@@ -80,6 +80,11 @@
 #define __glew_h__
 #define __GLEW_H__
 
+// Force static linkage (SC 29 Jan 2016)
+#ifndef GLEW_STATIC
+#  define GLEW_STATIC
+#endif
+
 #if defined(__gl_h_) || defined(__GL_H__)
 #error gl.h included before glew.h
 #endif
