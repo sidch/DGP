@@ -363,7 +363,7 @@ void
 BinaryOutputStream::commit(uint8 * dst) const
 {
   alwaysAssertM(m_path == "<memory>", getNameStr() + ": Can only commit buffer contents of memory streams to memory");
-  std::memcpy(dst, m_buffer, m_bufferLen);
+  std::memcpy(dst, m_buffer, (size_t)m_bufferLen);
 }
 
 void

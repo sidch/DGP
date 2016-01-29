@@ -196,6 +196,11 @@
 
 #define ANSI_DECLARATORS
 
+#ifdef _MSC_VER
+#  define _CRT_SECURE_NO_WARNINGS
+#  define _SCL_SECURE_NO_WARNINGS
+#endif
+
 /* For single precision (which will save some memory and reduce paging),     */
 /*   define the symbol SINGLE by using the -DSINGLE compiler switch or by    */
 /*   writing "#define SINGLE" below.                                         */
