@@ -14,7 +14,8 @@
 #include <cstdio>
 
 #ifdef DGP_WINDOWS
-#  include <direct.h>
+#  include <sys/types.h>
+#  include <sys/stat.h>
 #  define DGP_STAT _stat
 #  ifndef S_IREG
 #    define S_ISREG(B) ((B) & _S_IFREG)

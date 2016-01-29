@@ -63,7 +63,7 @@ bool const BinaryInputStream::NO_COPY = false;
 void
 BinaryInputStream::readBool8(int64 n, std::vector<bool> & out)
 {
-  out.resize((int)n);
+  out.resize((size_t)n);
 
   // std::vector optimizes bool in a way that prevents fast reading
   for (int64 i = 0; i < n ; ++i)
@@ -73,7 +73,7 @@ BinaryInputStream::readBool8(int64 n, std::vector<bool> & out)
 #define DGP_BINARY_INPUT_STREAM_DEFINE_READER(fname, tname) \
   void BinaryInputStream::read##fname(int64 n, std::vector<tname> & out) \
   { \
-    out.resize(n); \
+    out.resize((size_t)n); \
     read##fname(n, &out[0]); \
   }
 
@@ -184,7 +184,7 @@ BinaryInputStream::loadIntoMemory(int64 start_position, int64 min_length)
     m_bufferLength = min_length;
     alwaysAssertM(m_freeBuffer, getNameStr() + ": Need to reallocate buffer, but it is read-only");
 
-    m_buffer = (uint8 *)std::realloc(m_buffer, m_bufferLength);
+    m_buffer = (uint8 *)std::realloc(m_buffer, (size_t)m_bufferLength);
     if (!m_buffer)
       throw Error(getNameStr() + ": Tried to read a larger memory chunk than could fit in memory");
   }
@@ -265,8 +265,8 @@ BinaryInputStream::BinaryInputStream(uint8 const * data, int64 data_len, Endiann
   else
   {
     debugAssertM(m_freeBuffer, "BinaryInputStream: Must free buffer if it is a copy");
-    m_buffer = (uint8 *)std::malloc(m_length);
-    std::memcpy(m_buffer, data, data_len);
+    m_buffer = (uint8 *)std::malloc((size_t)m_length);
+    std::memcpy(m_buffer, data, (size_t)data_len);
   }
 }
 
@@ -309,7 +309,7 @@ BinaryInputStream::BinaryInputStream(std::string const & path, Endianness file_e
   }
 
   alwaysAssertM(m_freeBuffer, "BinaryInputStream: Allocated buffer not set to be freed");
-  m_buffer = (uint8 *)std::malloc(m_bufferLength);
+  m_buffer = (uint8 *)std::malloc((size_t)m_bufferLength);
 
   if (m_buffer == NULL)
   {
@@ -318,7 +318,7 @@ BinaryInputStream::BinaryInputStream(std::string const & path, Endianness file_e
     while ((m_buffer == NULL) && (m_bufferLength > 1024))
     {
       m_bufferLength /= 2;
-      m_buffer = (uint8 *)std::malloc(m_bufferLength);
+      m_buffer = (uint8 *)std::malloc((size_t)m_bufferLength);
     }
   }
 
@@ -343,7 +343,7 @@ void
 BinaryInputStream::readBytes(int64 n, void * bytes)
 {
   prepareToRead(n);
-  std::memcpy(bytes, m_buffer + m_pos, n);
+  std::memcpy(bytes, m_buffer + m_pos, (size_t)n);
   m_pos += n;
 }
 
@@ -392,11 +392,11 @@ BinaryInputStream::readString(int64 n)
 {
   prepareToRead(n);
 
-  char * s = (char *)std::malloc(n + 1);
+  char * s = (char *)std::malloc((size_t)n + 1);
   if (!s)
     throw Error(getNameStr() + ": Could not allocate buffer for reading string");
 
-  std::memcpy(s, m_buffer + m_pos, n);
+  std::memcpy(s, m_buffer + m_pos, (size_t)n);
 
   // There may not be a null, so make sure
   // we add one.

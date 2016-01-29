@@ -212,7 +212,7 @@ BinaryOutputStream::reserveBytesWhenOutOfMemory(size_t bytes)
     debugAssertM(m_pos <= m_bufferLen, getNameStr() + ": Write position is beyond end of buffer");
 
     // Shift the unwritten data back appropriately in the buffer.
-    std::memmove(m_buffer, m_buffer + bytesToWrite, m_bufferLen);
+    std::memmove(m_buffer, m_buffer + bytesToWrite, (size_t)m_bufferLen);
 
     // *Now* we allocate bytes (there should presumably be enough space in the buffer; if not, we'll come back through this code
     // and dump the last 10MB to disk as well.  Note that the bytes > maxBufferLen case above would already have triggered if
@@ -340,7 +340,7 @@ BinaryOutputStream::_commit(bool flush, bool force)
   {
     if (m_buffer != NULL && m_bufferLen > 0)
     {
-      size_t success = fwrite(m_buffer, m_bufferLen, 1, file);
+      size_t success = fwrite(m_buffer, (size_t)m_bufferLen, 1, file);
       debugAssertM(success == 1, getNameStr() + ": Could not write buffer contents to disk");
       (void)success;
 

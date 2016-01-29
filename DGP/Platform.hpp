@@ -43,6 +43,11 @@
    // Disable numerical type conversion "possible loss of precision" warnings
 #  pragma warning( disable: 4244 )
 
+   // Disable deprecation of C/C++ standard library functions (fopen, strcpy etc)
+   // TODO: A more future-proof solution would be useful.
+#  define _CRT_SECURE_NO_WARNINGS
+#  define _SCL_SECURE_NO_WARNINGS
+
 #elif defined(__FreeBSD__)
 #  define DGP_FREEBSD 1
 #elif defined(__OpenBSD__)
