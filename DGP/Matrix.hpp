@@ -533,7 +533,7 @@ class /* DGP_API */ Matrix : public AddressableMatrix<T>, public ResizableMatrix
     }
 
     /** Multiplication. */
-    Matrix operator*(Matrix const & rhs)
+    Matrix operator*(Matrix const & rhs) const
     {
       alwaysAssertM(numColumns() == rhs.numRows(), "Matrix: Matrices don't have compatible dimensions for multiplication");
 
