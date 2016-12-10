@@ -126,7 +126,7 @@ RenderSystem::destroyFramebuffer(Framebuffer * framebuffer)
   if (!framebuffer)
     return;
 
-  if (created_framebuffers.erase(dynamic_cast<Framebuffer *>(framebuffer)) < 1)
+  if (created_framebuffers.erase(framebuffer) < 1)
   {
     DGP_ERROR << getName() << ": Attempting to destroy framebuffer '" << framebuffer->getName()
                << "' which was not created using this rendersystem";
@@ -152,7 +152,7 @@ RenderSystem::destroyShader(Shader * shader)
   if (!shader)
     return;
 
-  if (created_shaders.erase(dynamic_cast<Shader *>(shader)) < 1)
+  if (created_shaders.erase(shader) < 1)
   {
     DGP_ERROR << getName() << ": Attempting to destroy shader '" << shader->getName()
                << "' which was not created using this rendersystem";
@@ -201,7 +201,7 @@ RenderSystem::destroyTexture(Texture * texture)
   if (!texture)
     return;
 
-  if (created_textures.erase(dynamic_cast<Texture *>(texture)) < 1)
+  if (created_textures.erase(texture) < 1)
   {
     DGP_ERROR << getName() << ": Attempting to destroy texture '" << texture->getName()
                << "' which was not created using this rendersystem";
@@ -227,7 +227,7 @@ RenderSystem::destroyVARArea(VARArea * area)
   if (!area)
     return;
 
-  if (created_varareas.erase(dynamic_cast<VARArea *>(area)) < 1)
+  if (created_varareas.erase(area) < 1)
   {
     DGP_ERROR << getName() << ": Attempting to destroy VAR area '" << area->getName()
                << "' which was not created using this rendersystem";
@@ -251,13 +251,10 @@ RenderSystem::setFramebuffer(Framebuffer * framebuffer)
 {
   if (framebuffer)
   {
-    Framebuffer * glfb = dynamic_cast<Framebuffer *>(framebuffer);
-    debugAssertM(glfb, std::string(getName()) + ": Attempt to use a non-OpenGL framebuffer with a GL rendersystem");
-
-    if (glfb != current_framebuffer)
+    if (framebuffer != current_framebuffer)
     {
-      glfb->use();
-      current_framebuffer = glfb;
+      framebuffer->use();
+      current_framebuffer = framebuffer;
     }
   }
   else
@@ -311,13 +308,10 @@ RenderSystem::setShader(Shader * shader)
 
   if (shader)
   {
-    Shader * glshader = dynamic_cast<Shader *>(shader);
-    debugAssertM(glshader, std::string(getName()) + ": Attempt to use a non-OpenGL shader with a GL rendersystem");
-
-    if (glshader != current_shader)
+    if (shader != current_shader)
     {
-      glshader->use();
-      current_shader = glshader;
+      shader->use();
+      current_shader = shader;
     }
   }
   else
@@ -370,11 +364,8 @@ RenderSystem::setTexture(int texunit, Texture * texture)
 
   if (texture)
   {
-    Texture * gltex = dynamic_cast<Texture *>(texture);
-    debugAssertM(gltex, std::string(getName()) + ": Attempt to use a non-OpenGL texture with a GL rendersystem");
-
-    GLenum target = gltex->getGLTarget();
-    GLuint id     = gltex->getGLID();
+    GLenum target = texture->getGLTarget();
+    GLuint id     = texture->getGLID();
 
     glEnable(target);
     glBindTexture(target, id);
@@ -442,13 +433,14 @@ RenderSystem::setVertexArray(VAR const * vertices)
   if (vertices)
   {
     assert(vertices->isValid());
+    assert(vertices->getGLType() != GL_UNSIGNED_BYTE
+        && vertices->getGLType() != GL_UNSIGNED_SHORT
+        && vertices->getGLType() != GL_UNSIGNED_INT);
 
-    VAR const & g = dynamic_cast<VAR const &>(*vertices);
-    assert(g.getGLType() != GL_UNSIGNED_BYTE && g.getGLType() != GL_UNSIGNED_SHORT && g.getGLType() != GL_UNSIGNED_INT);
-
-    setVertexAreaFromVAR(g);
+    setVertexAreaFromVAR(*vertices);
     glEnableClientState(GL_VERTEX_ARRAY);
-    glVertexPointer(g.getNumComponents(), g.getGLType(), g.getElementSize(), g.getBasePointer());
+    glVertexPointer(vertices->getNumComponents(), vertices->getGLType(), vertices->getElementSize(),
+                    vertices->getBasePointer());
   }
   else
     glDisableClientState(GL_VERTEX_ARRAY);
@@ -460,11 +452,9 @@ RenderSystem::setColorArray(VAR const * colors)
   if (colors)
   {
     assert(colors->isValid());
-    VAR const & g = dynamic_cast<VAR const &>(*colors);
-
-    setVertexAreaFromVAR(g);
+    setVertexAreaFromVAR(*colors);
     glEnableClientState(GL_COLOR_ARRAY);
-    glColorPointer(g.getNumComponents(), g.getGLType(), g.getElementSize(), g.getBasePointer());
+    glColorPointer(colors->getNumComponents(), colors->getGLType(), colors->getElementSize(), colors->getBasePointer());
   }
   else
     glDisableClientState(GL_COLOR_ARRAY);
@@ -479,14 +469,13 @@ RenderSystem::setTexCoordArray(int texunit, VAR const * texcoords)
     debugAssertM(DGP_SUPPORTS(ARB_multitexture) || (texunit == 0),
                  std::string(getName()) + ": Graphics card does not support multitexture");
 
-    VAR const & g = dynamic_cast<VAR const &>(*texcoords);
-
     if (DGP_SUPPORTS(ARB_multitexture))
       glClientActiveTextureARB(GL_TEXTURE0_ARB + texunit);
 
-    setVertexAreaFromVAR(g);
+    setVertexAreaFromVAR(*texcoords);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glTexCoordPointer(g.getNumComponents(), g.getGLType(), g.getElementSize(), g.getBasePointer());
+    glTexCoordPointer(texcoords->getNumComponents(), texcoords->getGLType(), texcoords->getElementSize(),
+                      texcoords->getBasePointer());
 
     if (DGP_SUPPORTS(ARB_multitexture))
       glClientActiveTextureARB(GL_TEXTURE0_ARB);
@@ -501,14 +490,14 @@ RenderSystem::setNormalArray(VAR const * normals)
   if (normals)
   {
     assert(normals->isValid());
+    assert(normals->getNumComponents() == 3);
+    assert(normals->getGLType() != GL_UNSIGNED_BYTE
+        && normals->getGLType() != GL_UNSIGNED_SHORT
+        && normals->getGLType() != GL_UNSIGNED_INT);
 
-    VAR const & g = dynamic_cast<VAR const &>(*normals);
-    assert(g.getNumComponents() == 3);
-    assert(g.getGLType() != GL_UNSIGNED_BYTE && g.getGLType() != GL_UNSIGNED_SHORT && g.getGLType() != GL_UNSIGNED_INT);
-
-    setVertexAreaFromVAR(g);
+    setVertexAreaFromVAR(*normals);
     glEnableClientState(GL_NORMAL_ARRAY);
-    glNormalPointer(g.getGLType(), g.getElementSize(), g.getBasePointer());
+    glNormalPointer(normals->getGLType(), normals->getElementSize(), normals->getBasePointer());
   }
   else
     glDisableClientState(GL_NORMAL_ARRAY);
@@ -520,14 +509,12 @@ RenderSystem::setIndexArray(VAR const * indices)
   if (indices)
   {
     assert(indices->isValid());
+    assert(indices->getNumComponents() == 1);
+    assert(indices->getGLTarget() == GL_ELEMENT_ARRAY_BUFFER_ARB);
 
-    VAR const & g = dynamic_cast<VAR const &>(*indices);
-    assert(g.getNumComponents() == 1);
-    assert(g.getGLTarget() == GL_ELEMENT_ARRAY_BUFFER_ARB);
-
-    setIndexAreaFromVAR(g);
+    setIndexAreaFromVAR(*indices);
     glEnableClientState(GL_VERTEX_ARRAY);
-    current_buffer_state.index_var = g;
+    current_buffer_state.index_var = *indices;
   }
   else
   {
