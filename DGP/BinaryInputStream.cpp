@@ -272,7 +272,7 @@ BinaryInputStream::BinaryInputStream(uint8 const * data, int64 data_len, Endiann
 
 BinaryInputStream::BinaryInputStream(std::string const & path, Endianness file_endian)
 : NamedObject(FilePath::objectName(path)),
-  m_path(path),
+  m_path(FileSystem::resolve(path)),
   m_bitPos(0),
   m_bitString(0),
   m_beginEndBits(0),
@@ -428,8 +428,8 @@ BinaryInputStream::readNullTerminatedString()
     while ( ((m_pos + m_alreadyRead + n) < (m_length - 1)) &&
             (m_buffer[m_pos + n] != '\0') )
     {
-      prepareToRead(1);
       ++n;
+      prepareToRead(n);
     }
   }
 
@@ -456,8 +456,8 @@ BinaryInputStream::readLine()
     while ( ((m_pos + m_alreadyRead + n) < (m_length - 1)) &&
             ! isNewline(m_buffer[m_pos + n]))
     {
-      prepareToRead(1);
       ++n;
+      prepareToRead(n);
     }
   }
 
@@ -472,7 +472,7 @@ BinaryInputStream::readLine()
     if (hasMore())
     {
       prepareToRead(1);
-      if (isNewline(m_buffer[m_pos + 1]) && (m_buffer[m_pos + 1] != firstNLChar))
+      if (isNewline(m_buffer[m_pos]) && (m_buffer[m_pos] != firstNLChar))
         skip(1);
     }
   }
