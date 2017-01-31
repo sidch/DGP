@@ -129,6 +129,18 @@ FILE_PATTERNS          = *.c \
                          *.MM \
                          *.PY
 RECURSIVE              = YES
+EXCLUDE               += DGP/stb_image.cpp
+EXCLUDE               += DGP/stb_image.hpp
+EXCLUDE               += DGP/stb_image_resize.cpp
+EXCLUDE               += DGP/stb_image_resize.hpp
+EXCLUDE               += DGP/stb_image_write.cpp
+EXCLUDE               += DGP/stb_image_write.hpp
+EXCLUDE               += DGP/Triangle_triangle.cpp
+EXCLUDE               += DGP/Triangle_triangle.hpp
+EXCLUDE               += DGP/Graphics/glew.cpp
+EXCLUDE               += DGP/Graphics/glew.hpp
+EXCLUDE               += DGP/Graphics/wglew.hpp
+EXCLUDE               += DGP/Graphics/glxew.hpp
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       =
 EXCLUDE_SYMBOLS        =
