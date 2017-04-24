@@ -405,7 +405,7 @@ class /* DGP_DLL_LOCAL */ Triangle3Base : public RayIntersectable3
         }
       }
 
-      return d;
+      return min_sqdist;
     }
 
     /** Get the squared distance of the triangle from a ball. */
