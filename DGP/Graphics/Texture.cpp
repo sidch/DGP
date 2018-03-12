@@ -64,7 +64,7 @@ Texture::toTextureFormat(Image::Type type)
 static void
 Texture__setDefaultUnpackingOptions(int row_alignment)
 {
-  debugAssertM(row_alignment >= 0, "Texture: Row alignment cannot be negative");
+  debugAssertM(row_alignment >= 1, "Texture: Row alignment must be positive");
 
   // GL's default values for everything except alignment
   glPixelStorei(GL_UNPACK_SWAP_BYTES, GL_FALSE);
@@ -78,7 +78,7 @@ Texture__setDefaultUnpackingOptions(int row_alignment)
 static void
 Texture__setDefaultPackingOptions(int row_alignment)
 {
-  debugAssertM(row_alignment >= 0, "Texture: Row alignment cannot be negative");
+  debugAssertM(row_alignment >= 1, "Texture: Row alignment must be positive");
 
   // GL's default values for everything except alignment
   glPixelStorei(GL_PACK_SWAP_BYTES, GL_FALSE);

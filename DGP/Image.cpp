@@ -377,7 +377,7 @@ Image::getScanWidth() const
 int
 Image::getRowAlignment() const
 {
-  return 0;  // stbi does no alignment
+  return 1;  // stbi does no alignment
 }
 
 namespace ImageInternal {
