@@ -26,7 +26,7 @@ namespace DGP {
  *
  * @note A (N - 1)-sphere is the (N - 1)-dimensional surface of a N-dimensional ball.
  */
-template <long N, typename T>
+template <long N, typename T = Real>
 class /* DGP_API */ BallN : public RayIntersectableN<N, T>
 {
   public:

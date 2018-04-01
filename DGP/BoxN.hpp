@@ -20,7 +20,7 @@
 namespace DGP {
 
 /** An arbitrarily oriented box, implemented as an axis-aligned box in a coordinate frame. */
-template <long N, typename T>
+template <long N, typename T = Real>
 class /* DGP_API */ BoxN : public RayIntersectableN<N, T>
 {
   public:

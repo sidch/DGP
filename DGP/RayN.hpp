@@ -19,7 +19,7 @@
 namespace DGP {
 
 /** A ray in N-dimensional space, having an originating point and a direction vector (not necessarily unit length). */
-template <long N, typename T>
+template <long N, typename T = Real>
 class /* DGP_API */ RayN
 {
   public:

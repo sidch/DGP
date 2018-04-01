@@ -400,7 +400,7 @@ class /* DGP_DLL_LOCAL */ SquareMatrixN : public MatrixMNBase<N, N, T>
  * Fixed-size M x N matrices, where M (rows) and N (columns) are any <b>positive</b> (non-zero) integers and T is a field. The
  * matrices are stored internally in row-major form, so row-major access is recommended.
  */
-template <long M, long N, typename T>
+template <long M, long N, typename T = Real>
 class /* DGP_API */ MatrixMN : public Internal::MatrixMNBase<M, N, T>
 {
   private:

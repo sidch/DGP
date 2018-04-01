@@ -126,7 +126,7 @@ class /* DGP_DLL_LOCAL */ CoordinateFrameNBase : public RigidTransformN<N, T>
 } // namespace Internal
 
 /** A coordinate frame in N-space, defined by N orthonormal vectors. */
-template <long N, typename T>
+template <long N, typename T = Real>
 class /* DGP_API */ CoordinateFrameN : public Internal::CoordinateFrameNBase<N, T>
 {
   private:

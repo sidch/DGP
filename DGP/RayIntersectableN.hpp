@@ -21,7 +21,7 @@ namespace DGP {
  * A description of the intersection point of a ray with an object. Specifies the hit time and the normal at the intersection
  * point.
  */
-template <long N, typename T>
+template <long N, typename T = Real>
 class /* DGP_API */ RayIntersectionN
 {
   public:
@@ -58,8 +58,8 @@ class /* DGP_API */ RayIntersectionN
 
 }; // class RayIntersectionN
 
-/** Interface for an object that supports ray intersection queries in 3-space. */
-template <long N, typename T>
+/** Interface for an object that supports ray intersection queries in N-space. */
+template <long N, typename T = Real>
 class /* DGP_API */ RayIntersectableN
 {
   public:

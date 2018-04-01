@@ -446,7 +446,7 @@ class /* DGP_DLL_LOCAL */ AxisAlignedBoxNBase : public RayIntersectableN<N, T>
 } // namespace Internal
 
 /** An axis-aligned box in N-dimensional space, where N is any <b>positive</b> (non-zero) integer and T is a field. */
-template <long N, typename T>
+template <long N, typename T = Real>
 class /* DGP_API */ AxisAlignedBoxN : public Internal::AxisAlignedBoxNBase<N, T>
 {
   private:
