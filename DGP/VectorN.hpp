@@ -415,6 +415,16 @@ class /* DGP_DLL_LOCAL */ VectorNBase
       return result;
     }
 
+    /** Per-element sign (-1, 0 or 1). */
+    VectorT sign() const
+    {
+      VectorT result;
+      for (long i = 0; i < N; ++i)
+        result[i] = Math::sign(values[i]);
+
+      return result;
+    }
+
     /** Get the square of the L2 length of the vector. */
     T squaredLength() const { return this->dot(*static_cast<VectorT const *>(this)); }
 

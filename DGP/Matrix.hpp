@@ -665,6 +665,17 @@ class /* DGP_API */ Matrix : public AddressableMatrix<T>, public ResizableMatrix
       return result;
     }
 
+    /** Per-element sign (-1, 0 or 1). */
+    Matrix sign() const
+    {
+      Matrix result(num_rows, num_cols);
+      for (long r = 0; r < num_rows; ++r)
+        for (long c = 0; c < num_cols; ++c)
+          result(r, c) = Math::sign((*this)(r, c));
+
+      return result;
+    }
+
   private:
     long num_rows, num_cols;
     T * values;

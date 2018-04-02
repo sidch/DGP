@@ -321,6 +321,17 @@ class /* DGP_DLL_LOCAL */ MatrixMNBase : public AddressableMatrix<T>
       return result;
     }
 
+    /** Per-element sign (-1, 0 or 1). */
+    MatrixT sign() const
+    {
+      MatrixT result;
+      for (long i = 0; i < M; ++i)
+        for (long j = 0; j < N; ++j)
+          result.m[i][j] = Math::sign(m[i][j]);
+
+      return result;
+    }
+
     /** Get a matrix containing only zeroes. */
     static MatrixT const & zero() { static MatrixT const z(static_cast<T>(0)); return z; }
 
