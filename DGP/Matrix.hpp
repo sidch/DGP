@@ -15,6 +15,7 @@
 #include "Common.hpp"
 #include "FastCopy.hpp"
 #include "AddressableMatrix.hpp"
+#include "Math.hpp"
 #include "MatrixInvert.hpp"
 #include "ResizableMatrix.hpp"
 #include <algorithm>
